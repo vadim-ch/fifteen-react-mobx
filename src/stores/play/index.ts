@@ -27,10 +27,18 @@ export class PlayStore {
     this.init();
   }
 
+  @computed get isCompleted(): boolean {
+    return this.fields.every((field, i) => field === i);
+  }
+
+  @computed get isSolved(): boolean {
+    return true;
+  }
+
   // методы для изменения стора
-  @action public changeSize(size: number) {
-    if (size < 0) {
-      size = 0;
+  @action public changeSize(size: number): void {
+    if (size < this.size) {
+      size = this.size;
     }
     if (size > MAX_SIZE) {
       size = MAX_SIZE;
@@ -40,13 +48,16 @@ export class PlayStore {
 
   @action public init() {
     this.createFields();
+    if (this.isSolved) {
+      this.swapFields(0, 1);
+    }
     this.indexZero = this.findZero();
   }
 
   @action public move(move: Move): void {
     const indexMove = this.indexZero + INDEX_SIDE[move];
-    console.error(indexMove);
-    if (indexMove >= 0 && indexMove < this.fields.length) {
+    // if (indexMove >= 0 && indexMove < this.fields.length) {
+    if (this.fields[indexMove] && this.isAvailableMove(move, indexMove, this.indexZero)) {
       this.swapFields(indexMove, this.indexZero);
       this.indexZero = indexMove;
     }
@@ -61,10 +72,15 @@ export class PlayStore {
     return this.fields.findIndex((field: number) => field === 0);
   }
 
-  private swapFields(prevIndex, nextIndex) {
+  private swapFields(prevIndex: number, nextIndex: number): void {
     const temp = this.fields[prevIndex];
     this.fields[prevIndex] = this.fields[nextIndex];
     this.fields[nextIndex] = temp;
+  }
+
+  private isAvailableMove(move: Move, index: number, indexZero: number): boolean {
+    return !((move === Move.Left || move === Move.Right) &&
+      Math.floor(index / this.size) !== Math.floor(indexZero / this.size));
   }
 }
 

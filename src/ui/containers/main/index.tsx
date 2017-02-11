@@ -53,6 +53,7 @@ export class Main extends React.Component<any, {}> {
     return (
         <div style={{margin: '50px auto', width: '400px', height: '400px'}}>
           {fields(play.fields)}
+          {play.isCompleted ? 'Победа!!!' : 'Не собрано'}
           <DevTools/>
         </div>
     );
