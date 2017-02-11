@@ -6,14 +6,10 @@ const MAX_SIZE = 10;
 export class PlayStore {
 
   @observable private size: number = 4;
-  @observable private fields: Array<number> = [];
+  @observable public fields: Array<number> = [];
 
   constructor() {
     this.init();
-  }
-
-  public getFields() {
-    return this.fields;
   }
 
   // методы для изменения стора
@@ -28,7 +24,8 @@ export class PlayStore {
   }
 
   @action private init() {
-
+    this.fields.length = Math.pow(this.size, 2);
+    this.fields = this.fields.map((field, i) => i).sort(() => Math.random()-.5);
   }
 }
 

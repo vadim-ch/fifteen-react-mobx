@@ -16,10 +16,21 @@ export class Main extends React.Component<any, {}> {
   public render() {
     const application = this.props.application;
     const play = this.props.play;
-    console.error('render');
+    console.error('render', play.fields);
+    const fields = (fields) => fields.map(field => <div
+        style={{
+          width: '98px',
+          height: '98px',
+          display: 'inline-block',
+          textAlign: 'center',
+          lineHeight: '98px',
+          border: '1px solid',
+          verticalAlign: 'top'
+          }} key={field}>{field ? field: ''}</div>);
+
     return (
-        <div style={{margin: '50px auto', width: '160px'}}>
-           <div></div>
+        <div style={{margin: '50px auto', width: '400px', height: '400px'}}>
+          {fields(play.fields)}
           <DevTools/>
         </div>
     );
