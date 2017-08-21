@@ -6,7 +6,7 @@
   "scripts": {
     "build": "./node_modules/webpack/bin/webpack.js",
     "build:watch": "./node_modules/webpack/bin/webpack.js --watch",
-    "dev": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --hot --inline --content-base public"
+    "dev": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --hot --inline --content-base public --port 3000"
   },
   "files": [
     "public/"
@@ -22,10 +22,10 @@
     "webpack-dev-server": "^1.8.2"
   },
   "dependencies": {
-    "mobx": "^2.5.1",
-    "mobx-react": "^3.5.6",
-    "mobx-react-devtools": "^4.2.6",
-    "react": "^15.3.1",
-    "react-dom": "^15.3.1"
+    "mobx": "^2.7.0",
+    "mobx-react": "^3.5.9",
+    "mobx-react-devtools": "^4.2.15",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
   }
 }
